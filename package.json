@@ -18,5 +18,8 @@
     "express-rate-limit": "^8.5.2",
     "jsonwebtoken": "9.0.2",
     "mongoose": "8.9.5"
+  },
+  "devDependencies": {
+    "docx": "^9.6.1"
   }
 }

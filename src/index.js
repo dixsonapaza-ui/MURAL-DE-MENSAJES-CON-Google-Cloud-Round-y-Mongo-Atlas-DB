@@ -36,7 +36,7 @@ app.use(express.json());
 const rateLimit = require('express-rate-limit');
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutos
-  max: 1500, // Limite alto porque la app espera muchos usuarios
+  max: 15000, // Soporta pruebas masivas (1200 hilos × 10 loops = 12,000 peticiones)
   message: { error: 'Demasiadas peticiones desde esta IP, por favor intenta de nuevo más tarde.' }
 });
 app.use(limiter);

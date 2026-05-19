@@ -27,6 +27,14 @@ const User = require('../models/user.model');
 const SALT_ROUNDS = parseInt(process.env.BCRYPT_SALT_ROUNDS, 10) || 8;
 
 /**
+ * Funciones de validación de entrada.
+ * Rechazan espacios en blanco (alt+32) y caracteres especiales en contraseñas.
+ */
+const hasWhitespace = (str) => /\s/.test(str);
+const hasSpecialChars = (str) => /[^a-zA-Z0-9]/.test(str);
+const isValidEmail = (str) => /^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(str);
+
+/**
  * POST /api/auth/register
  * Crea un nuevo usuario con email y contraseña hasheada.
  */
@@ -37,6 +45,21 @@ const register = async (req, res) => {
     // Validación de campos requeridos
     if (!email || !password) {
       return res.status(400).json({ error: 'Email y contraseña son obligatorios' });
+    }
+
+    // Validación de espacios en blanco
+    if (hasWhitespace(email) || hasWhitespace(password)) {
+      return res.status(400).json({ error: 'No se permiten espacios en blanco' });
+    }
+
+    // Validación de formato de email
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ error: 'Formato de email inválido' });
+    }
+
+    // Validación de caracteres especiales en contraseña
+    if (hasSpecialChars(password)) {
+      return res.status(400).json({ error: 'La contraseña solo puede contener letras y números' });
     }
 
     // Verificar si el email ya existe
@@ -73,6 +96,21 @@ const login = async (req, res) => {
 
     if (!email || !password) {
       return res.status(400).json({ error: 'Email y contraseña son obligatorios' });
+    }
+
+    // Validación de espacios en blanco
+    if (hasWhitespace(email) || hasWhitespace(password)) {
+      return res.status(400).json({ error: 'No se permiten espacios en blanco' });
+    }
+
+    // Validación de formato de email
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ error: 'Formato de email inválido' });
+    }
+
+    // Validación de caracteres especiales en contraseña
+    if (hasSpecialChars(password)) {
+      return res.status(400).json({ error: 'La contraseña solo puede contener letras y números' });
     }
 
     // Buscar usuario — NO usar .lean() aquí porque necesitamos el password

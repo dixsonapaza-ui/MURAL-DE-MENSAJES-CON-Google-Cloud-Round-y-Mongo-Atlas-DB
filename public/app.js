@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════════════════
-   APP.JS — Lógica completa del frontend ANTIGRAVITY
+   APP.JS — Lógica completa del frontend FLORO
    Sin frameworks. Vanilla JavaScript.
    ══════════════════════════════════════════════════════════════ */
 
@@ -12,6 +12,21 @@
 const API_URL = '';
 
 const AVATAR_COLORS = ['#534AB7', '#E54D4D', '#1D9E75', '#D4A843', '#4A8FE7', '#E5734D'];
+
+/**
+ * Validación de entrada — rechaza espacios en blanco y caracteres especiales.
+ * Solo permite letras, números, @, . y _ en emails.
+ * Solo permite letras y números en contraseñas.
+ */
+function hasWhitespace(str) {
+  return /\s/.test(str);
+}
+function hasSpecialChars(str) {
+  return /[^a-zA-Z0-9]/.test(str);
+}
+function isValidEmail(str) {
+  return /^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(str);
+}
 
 /* ══════════════════════════════════════════════════════════════
    INICIALIZACIÓN — Detectar página y arrancar
@@ -78,6 +93,21 @@ async function handleLogin() {
     return;
   }
 
+  if (hasWhitespace(email) || hasWhitespace(password)) {
+    showMessage(errorEl, 'No se permiten espacios en blanco');
+    return;
+  }
+
+  if (!isValidEmail(email)) {
+    showMessage(errorEl, 'Formato de email inválido');
+    return;
+  }
+
+  if (hasSpecialChars(password)) {
+    showMessage(errorEl, 'La contraseña solo puede contener letras y números');
+    return;
+  }
+
   setLoading(btn, true);
 
   try {
@@ -114,6 +144,21 @@ async function handleRegister() {
 
   if (!email || !password) {
     showMessage(errorEl, 'Completa todos los campos');
+    return;
+  }
+
+  if (hasWhitespace(email) || hasWhitespace(password)) {
+    showMessage(errorEl, 'No se permiten espacios en blanco');
+    return;
+  }
+
+  if (!isValidEmail(email)) {
+    showMessage(errorEl, 'Formato de email inválido');
+    return;
+  }
+
+  if (hasSpecialChars(password)) {
+    showMessage(errorEl, 'La contraseña solo puede contener letras y números');
     return;
   }
 
