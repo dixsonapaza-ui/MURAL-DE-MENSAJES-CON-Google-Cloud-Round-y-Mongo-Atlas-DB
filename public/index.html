@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Muro de Mensajes — Plataforma de comunicación en tiempo real">
+  <title>ANTIGRAVITY — Acceso</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="grid-bg">
+
+  <div class="auth-wrapper">
+    <div class="auth-card" id="auth-card">
+
+      <div class="logo">
+        <span class="logo-dots">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </span>
+        <span class="logo-text">ANTIGRAVITY</span>
+      </div>
+
+      <p class="auth-subtitle">Muro de Mensajes</p>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="login">Entrar</button>
+        <button class="tab" data-tab="register">Registro</button>
+      </div>
+
+      <form id="login-form" class="auth-form" novalidate>
+        <div class="input-group">
+          <label for="login-email" class="input-label">Email</label>
+          <input type="email" id="login-email" class="input" placeholder="tu@email.com" autocomplete="email" required>
+        </div>
+        <div class="input-group">
+          <label for="login-password" class="input-label">Contraseña</label>
+          <input type="password" id="login-password" class="input" placeholder="••••••••" autocomplete="current-password" required>
+        </div>
+        <button type="submit" id="login-btn" class="btn btn-primary">
+          <span class="btn-text">Entrar</span>
+          <span class="btn-spinner"></span>
+        </button>
+        <div id="login-error" class="form-message error-message"></div>
+      </form>
+
+      <form id="register-form" class="auth-form hidden" novalidate>
+        <div class="input-group">
+          <label for="register-email" class="input-label">Email</label>
+          <input type="email" id="register-email" class="input" placeholder="tu@email.com" autocomplete="email" required>
+        </div>
+        <div class="input-group">
+          <label for="register-password" class="input-label">Contraseña</label>
+          <input type="password" id="register-password" class="input" placeholder="Mínimo 6 caracteres" autocomplete="new-password" required>
+        </div>
+        <button type="submit" id="register-btn" class="btn btn-primary">
+          <span class="btn-text">Crear cuenta</span>
+          <span class="btn-spinner"></span>
+        </button>
+        <div id="register-error" class="form-message error-message"></div>
+        <div id="register-success" class="form-message success-message"></div>
+      </form>
+
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
